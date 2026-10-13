@@ -4,23 +4,31 @@
     {
       "id": 1,
       "name": "peer-review-before-submission",
-      "prompt": "我这份审稿意见改到第四稿了，明天要交。你帮我再过一遍，我总觉得哪里还有问题。稿子在这：审稿意见_PSY-D-26-03918.md，原文是 manuscript.pdf，都在这个目录下。",
-      "expected_output": "按 RCAI 循环执行：先规划本轮维度（至少一个此前未用过的），逐条断言回查源文件具体位置，纠错后当场跑修正回归，最后给出收敛判定。不应只是通读一遍给几条泛泛建议。",
-      "files": []
+      "prompt": "我这份审稿意见改到第四稿了，明天要交。你帮我再过一遍，我总觉得哪里还有问题。审稿意见在 review-draft.md，被审的稿件原文是 manuscript.md，都在同一个目录下。",
+      "expected_output": "按 RCAI 循环执行：先规划本轮维度（至少一个此前未用过的），逐条断言回查源文件的具体位置，纠错后当场跑修正回归，最后给出收敛判定。核心是抓住意见里与稿件原文不符的那些条——不是通读一遍给几条泛泛建议。",
+      "files": [
+        "fixtures/review-draft.md",
+        "fixtures/manuscript.md"
+      ]
     },
     {
       "id": 2,
-      "name": "review-article-number-consistency",
-      "prompt": "这篇综述中文版和英文版要一起交，你帮我核一下两版的数字对不对得上。中英两版分别在 review_zh.docx 和 review_en.docx。",
-      "expected_output": "调用 scripts/number_diff.py 做跨版本数字集合比对，把「仅一侧有」的数字连同上文列出来，并明确说明这只缩小了人工核对范围、不构成通过判据（口径仍需人工过 D1）。",
-      "files": []
+      "name": "cross-version-number-consistency",
+      "prompt": "这篇东西的中文版和英文版要一起交，你帮我核一下两版的数字对不对得上。review-zh.md 和 review-en.md 都在同一个目录下。",
+      "expected_output": "做跨版本数字集合比对，把「仅一侧有」和「两侧不一致」的数字连同上文列出来，并明确说明这只缩小了人工核对范围、不构成通过判据（口径仍需人工回查）。",
+      "files": [
+        "fixtures/review-zh.md",
+        "fixtures/review-en.md"
+      ]
     },
     {
       "id": 3,
       "name": "understated-request-no-keyword",
-      "prompt": "组会汇报的讲稿我写完了，周五就上。看着有点心虚，你瞅瞅。",
-      "expected_output": "识别出这是「对高后果文本做交付前自查」的场景（用户没说「自查」二字），主动应用本 skill。应注意到讲稿类交付物除了事实维度，还需要过 D23 代笔身份匹配与理解确认类检查，而不是只查错别字。",
-      "files": []
+      "prompt": "组会汇报的讲稿我写完了，周五就上。看着有点心虚，你瞅瞅。讲稿在 talk-script.md。",
+      "expected_output": "识别出这是「对高后果文本做交付前自查」的场景（用户没说「自查」二字），主动应用本 skill。应注意到讲稿类交付物除了事实维度，还需要过身份匹配与受众相关的维度，而不是只查错别字或只泛泛点评。",
+      "files": [
+        "fixtures/talk-script.md"
+      ]
     }
   ]
 }
