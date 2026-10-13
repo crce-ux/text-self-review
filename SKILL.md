@@ -101,3 +101,7 @@ compatibility: 主流程为纯文本操作，无依赖。scripts/number_diff.py 
 | `references/convergence.md` | 判收敛、触发止损、或需要留痕格式时；四轮实证数据也在这里 |
 | `references/independent-review.md` | 要引入独立视角（第二 agent / 第二模型 / 真人）时——**其中的隔离纪律务必先读** |
 | `scripts/number_diff.py` | 需要跨版本（中英 / md↔docx）核对数字是否一致时 |
+| `scripts/check_language.py` | 机检回指 / 排他性断言 / 空泛量词 / 缩写 / 数字口径时 |
+| `scripts/check_ref_citations.py` | 机检正文 [n] ↔ 文末编号表是否一一对应时 |
+
+> `scripts/` 下三个脚本都是**运行版**；正本在 [`research-workflow`](https://github.com/crce-ux/research-workflow) 的 `scripts/`——改脚本改那边再同步。详见 `scripts/README.md`。
