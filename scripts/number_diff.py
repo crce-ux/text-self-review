@@ -22,6 +22,13 @@ import pathlib
 import re
 import sys
 
+# Windows 控制台默认 GBK，中文与符号会抛 UnicodeEncodeError——强制 UTF-8 输出
+for _stream in (sys.stdout, sys.stderr):
+    try:
+        _stream.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
 # 匹配整数、小数、百分比、千分位、科学计数
 NUM_RE = re.compile(r"\d+(?:[.,]\d+)*(?:\s?[%％])?")
 
@@ -107,12 +114,12 @@ def main() -> None:
     print(f"B = {b.name}   数字 {len(nb)} 种")
     print(f"共有 {len(both)} 种｜仅 A 有 {len(only_a)} 种｜仅 B 有 {len(only_b)} 种")
 
-    report(f"⚠️ 仅 A 有", only_a, na, args.window)
-    report(f"⚠️ 仅 B 有", only_b, nb, args.window)
+    report("[仅 A 有]", only_a, na, args.window)
+    report("[仅 B 有]", only_b, nb, args.window)
 
     if not only_a and not only_b:
-        print("\n✅ 两版数字集合完全一致。")
-        print("   （注意：这只说明数字没漏，不说明口徑一致——口径仍需人工过 D1。）")
+        print("\n[OK] 两版数字集合完全一致。")
+        print("   （注意：这只说明数字没漏，不说明口径一致——口径仍需人工过 D1。）")
 
 
 if __name__ == "__main__":
