@@ -1,5 +1,8 @@
 # text-self-review
 
+[![Structure](https://github.com/crce-ux/text-self-review/actions/workflows/structure.yml/badge.svg)](https://github.com/crce-ux/text-self-review/actions/workflows/structure.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 **迭代式文本自查流程（RCAI 循环）**
 
 面向事实密度高、需对外交付的文本——审稿意见、论文稿件、综述、调研报告、汇报讲稿、对外邮件。
