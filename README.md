@@ -47,12 +47,16 @@
 把整个目录放进 skills 目录，或者直接读 `SKILL.md`。
 
 ```
-SKILL.md                          流程入口：何时用、骨架、纪律、收敛判据
-references/dimensions.md          23 个自查维度 + 高产出维度的详解
-references/convergence.md         迭代为什么必要、收敛判据、止损、留痕
+SKILL.md                          流程入口：骨架、三条纪律、收敛判据、实证纪律
+references/dimensions.md          23 个自查维度 + 6 个高产出维度的详解
+references/convergence.md         四轮实证数据、收敛判据、止损、留痕
 references/independent-review.md  引入独立视角时的隔离纪律
 scripts/number_diff.py            跨版本数字一致性比对
+evals/evals.json                  测试用例（触发场景 + 预期行为）
 ```
+
+遵循 Agent Skills 规范：`SKILL.md` frontmatter 含 `name` / `description` / `compatibility`，
+`name` 与目录名一致，正文按需经 `references/` 逐层加载。
 
 ## 适用与不适用
 
