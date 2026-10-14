@@ -6,6 +6,7 @@
 
 | 脚本 | 干什么 |
 |---|---|
+| `convergence_log.py` | **自查轮次记录 → 能不能判收敛**。按 C1a/C1b/C2/C3 判，**回流>0 的轮作废、自动摘出序列**；满 6 轮未收敛报止损 |
 | `number_diff.py` | 跨版本（中英 / md↔docx）核对数字是否一致 |
 | `check_language.py` | 回指 / 排他性断言 / 空泛量词 / 缩写 / 数字口径 |
 | `check_ref_citations.py` | 正文 [n] ↔ 文末编号表 双向核对 |
@@ -14,7 +15,7 @@
 
 | 脚本 | 依赖 |
 |---|---|
-| `check_language.py` · `check_ref_citations.py` | 标准库 |
+| `check_language.py` · `check_ref_citations.py` · `convergence_log.py` | 标准库 |
 | `number_diff.py` | Python 3.9+；读 .docx 需 `python-docx`，读 .pdf 需 `pymupdf` |
 | `check_skill_structure.py` | 结构校验（官方 Agent Skills 规范）：name / description / 正文长度 / 深链 / **声明落地** |
 | `selfcheck.py` | **一条命令自检**：结构 + 语法 + 依赖。见下 |
