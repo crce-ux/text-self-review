@@ -1,6 +1,6 @@
 # scripts/
 
-**这里是运行版。正本在 [`research-workflow`](https://github.com/crce-ux/research-workflow) 的 `scripts/`**——开发与测试都在那边。
+**这里是运行版。正本在 [`research-workflow`](https://github.com/crce-ux/research-workflow) 的 `scripts/`**——开发与测试都在 research-workflow。
 
 改脚本请改总仓，再同步过来；**不要只改这里**。
 
@@ -22,7 +22,7 @@
 
 ## 边界
 
-**脚本只做能自动化的那一半。** 命中 ≠ 要改——启发式判据报的是「可疑」，
+**脚本只做可自动化的部分。** 命中 ≠ 要改——启发式判据报的是「可疑」，
 判断「这句话是不是真的没出处」仍须人工。维度库（`references/dimensions.md`）才是主流程。
 
 ## 自检

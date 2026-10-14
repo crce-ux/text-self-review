@@ -9,7 +9,7 @@ compatibility: 主流程为纯文本操作，无依赖。scripts/number_diff.py 
 ## 边界
 
 本 skill 依赖「有一份源文件可回查」。纯创意写作、或没有事实锚点的文本不适用——
-那种情况下 `D1–D12` 全部跑不起来，硬跑只会产出臆断。
+对没有源文件可回查的文本，`D1–D12` 全部跑不起来，硬跑只会产出臆断。
 
 ---
 
@@ -53,7 +53,7 @@ compatibility: 主流程为纯文本操作，无依赖。scripts/number_diff.py 
 ## 三条纪律
 
 **1. 每轮至少引入一个从未用过的维度。**
-重复用过的维度等于把同一张网撒第二遍。
+重复用过的维度等于把同一轮检查做第二遍。
 
 **2. 修正回归（步骤 2.5）放在纠错当场跑，不推到下一轮。**
 改出来的句子是**新文本**，须即刻重查。不当场清掉，
@@ -89,7 +89,7 @@ python scripts/convergence_log.py 自查记录.md
 
 ## Anti-Patterns
 
-- **Never** 用同一个维度查同一版本第二遍——那不叫迭代，叫把同一张网撒两次
+- **Never** 用同一个维度查同一版本第二遍——它只是把同一轮检查做两次，不算迭代
 - **Never** 把「我自己又看了一遍」记作独立复核——没有独立执行者就标「独立复核未执行」
 - **Never** 在 `C1a` 未归零时判收敛
 - **Never** 跳过步骤 2.5（修正回归）
@@ -114,4 +114,4 @@ python scripts/convergence_log.py 自查记录.md
 | `scripts/check_language.py` | 机检回指 / 排他性断言 / 空泛量词 / 缩写 / 数字口径时 |
 | `scripts/check_ref_citations.py` | 机检正文 [n] ↔ 文末编号表是否一一对应时 |
 
-> `scripts/` 下三个脚本都是**运行版**；正本在 [`research-workflow`](https://github.com/crce-ux/research-workflow) 的 `scripts/`——改脚本改那边再同步。详见 `scripts/README.md`。
+> `scripts/` 下三个脚本都是**运行版**；正本在 [`research-workflow`](https://github.com/crce-ux/research-workflow) 的 `scripts/`——改脚本改正本再同步。详见 `scripts/README.md`。

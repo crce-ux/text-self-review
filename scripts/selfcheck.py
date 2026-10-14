@@ -4,7 +4,6 @@
 
 【给谁用】
     拿到这个 skill 的人。一条命令确认「东西是齐的、没坏的」。
-    在此之前，skill 仓只有 CI 在查，**下载的人手上没有任何自检手段**。
 
 【查三样】
     1. 结构       —— 调同目录的 `check_skill_structure.py`（官方规范：name / description /

@@ -3,7 +3,7 @@
 """check_skill_structure.py —— Agent Skill 结构校验器
 
 按官方规范（agentskills.io/specification）校验一个或多个 skill 目录：
-可以做 CI 的**静态检查**那一层——零依赖、不调模型、只读。
+可以做 CI 的**静态检查**层——零依赖、不调模型、只读。
 
 【查什么】
   name     ≤64 字符；仅小写字母/数字/连字符；不首尾连字符；不含 `--`；
@@ -15,7 +15,7 @@
   目录     有 references/ 或 scripts/ 时，SKILL.md 里应能索引到
   Anti-Patterns  建议存在，且条目应是**可判定禁令**而非形容词
   声明落地 SKILL.md / README.md 里写到的 `scripts/x.py`、`references/y.md` 必须真实存在
-           （**这条实际抓到过 bug**：文档声明了 `verify_pmid_doi.py`，分发时漏了那份文件）
+           （**这条实际抓到过 bug**：文档声明了 `verify_pmid_doi.py`，分发时漏了对应文件）
 
 【用法】
     python check_skill_structure.py <skill目录> [<skill目录> ...]
@@ -122,7 +122,7 @@ def check_skill(d: Path, strict: bool) -> tuple[list[str], list[str]]:
 
     # ── 引用只走一层 ──────────────────────────────────────
     for ref in re.findall(r"`(references/[^`]+)`", body):
-        # ⚠️ 占位符不是路径（如 `references/cards/<slug>.md`）——那是**在讲命名格式**，
+        # ⚠️ 占位符不是路径（如 `references/cards/<slug>.md`）——它在讲命名格式，
         #    不是深链。与「声明落地」同一条判据，两处都要豁免，否则同一类误报漏一处。
         if any(c in ref for c in "<>*?{}"):
             continue
@@ -146,8 +146,8 @@ def check_skill(d: Path, strict: bool) -> tuple[list[str], list[str]]:
             warns.append(f"{d.name}: Anti-Patterns 里有形容词式禁令——改成可判定的具体禁令")
 
     # ── 声明落地：文档里写到的文件必须真实存在 ────────────
-    # ⚠️ 这条抓到过真 bug：README 声明了 `verify_pmid_doi.py`，分发时却漏了那份文件，
-    #    文档与实物对不上，用户按文档找会扑空。所以是**错误**不是警告。
+    # ⚠️ 这条抓到过真 bug：README 声明了 `verify_pmid_doi.py`，分发时却漏了对应文件，
+    #    文档与实物对不上，用户按文档找会扑空。所以归为**错误**而非警告。
     declared = set()
     for doc in ("SKILL.md", "README.md", "scripts/README.md", "references/README.md"):
         f = d / doc
