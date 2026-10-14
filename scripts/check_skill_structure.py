@@ -122,6 +122,13 @@ def check_skill(d: Path, strict: bool) -> tuple[list[str], list[str]]:
 
     # ── 引用只走一层 ──────────────────────────────────────
     for ref in re.findall(r"`(references/[^`]+)`", body):
+        # ⚠️ 占位符不是路径（如 `references/cards/<slug>.md`）——那是**在讲命名格式**，
+        #    不是深链。与「声明落地」同一条判据，两处都要豁免，否则同一类误报漏一处。
+        if any(c in ref for c in "<>*?{}"):
+            continue
+        # 只对**文件**判深链——`references/cards/` 是目录提及，不是深链。
+        if not re.search(r"\.\w+$", ref):
+            continue
         if ref.count("/") > 1:
             errs.append(f"{d.name}: 深链引用 {ref}（规范只允许从 SKILL.md 往下一层）")
 
