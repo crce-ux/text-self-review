@@ -3,7 +3,7 @@
 """selfcheck.py —— skill 自检：结构 + 语法 + 声明落地
 
 【给谁用】
-    拿到这个 skill 的人。一条命令确认「东西是齐的、没坏的」。
+    拿到本 skill 的人。一条命令确认「东西是齐的、没坏的」。
 
 【查三样】
     1. 结构       —— 调同目录的 `check_skill_structure.py`（官方规范：name / description /
