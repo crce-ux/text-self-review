@@ -168,6 +168,29 @@ def check_skill(d: Path, strict: bool) -> tuple[list[str], list[str]]:
     return errs, warns
 
 
+def skill_dirs(root):
+    """找到所有 skill 目录。
+
+    两类：
+    ① 库根下的**直接子目录**里带 SKILL.md 的——独立的 skill 仓；
+    ② 各仓 `skills/<名字>/` 里带 SKILL.md 的——**总仓内嵌的 skill 包**。
+
+    ⚠️ **只下探一层**。再深就分不清「skill 包」与「skill 里引用的示例目录」了。
+    """
+    out = []
+    for p in sorted(root.iterdir()):
+        if not p.is_dir():
+            continue
+        if (p / "SKILL.md").is_file():
+            out.append(p)
+            continue
+        pack = p / "skills"
+        if pack.is_dir():
+            out += [q for q in sorted(pack.iterdir())
+                    if q.is_dir() and (q / "SKILL.md").is_file()]
+    return out
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description="Agent Skill 结构校验器")
     ap.add_argument("dirs", nargs="*", help="skill 目录")
@@ -177,9 +200,7 @@ def main() -> None:
 
     targets = [Path(x) for x in a.dirs]
     if a.root:
-        root = Path(a.root)
-        targets += [p for p in sorted(root.iterdir())
-                    if p.is_dir() and (p / "SKILL.md").is_file()]
+        targets += skill_dirs(Path(a.root))
     if not targets:
         print("没有可校验的目录")
         raise SystemExit(1)
