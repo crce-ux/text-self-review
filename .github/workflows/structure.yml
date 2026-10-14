@@ -1,4 +1,4 @@
-name: Skill structure
+name: Skill self-check
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
 
 jobs:
   validate:
-    name: 结构校验
+    name: 自检
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -16,60 +16,9 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: 校验 SKILL.md 结构（官方规范，静态、零依赖）
+      # 单一实现：结构与声明校验只在 scripts/check_skill_structure.py 里，
+      # 不再内嵌副本——副本会与正本岔开（原先那份就少了三条检查）。
+      - name: skill 自检（结构 + 语法）
         env:
           PYTHONUTF8: "1"
-        run: |
-          python - <<'PY'
-          import re, sys, pathlib
-
-          d = pathlib.Path(".").resolve()
-          f = d / "SKILL.md"
-          if not f.is_file():
-              sys.exit("缺 SKILL.md")
-
-          text = f.read_text(encoding="utf-8")
-          m = re.match(r"^---\s*\n(.*?)\n---\s*\n?", text, re.S)
-          if not m:
-              sys.exit("frontmatter 未正确闭合")
-
-          fields, body = {}, text[m.end():]
-          for line in m.group(1).splitlines():
-              if line and line[0] not in " \t#" and ":" in line:
-                  k, v = line.split(":", 1)
-                  fields[k.strip()] = v.strip()
-
-          errs = []
-          name = fields.get("name", "")
-          if not name:
-              errs.append("缺 name")
-          else:
-              if len(name) > 64:
-                  errs.append(f"name 超 64 字符（{len(name)}）")
-              if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", name):
-                  errs.append(f"name 格式不合规：{name!r}")
-              if name != d.name:
-                  errs.append(f"name（{name!r}）与目录名（{d.name!r}）不一致")
-              for w in ("anthropic", "claude"):
-                  if w in name.lower():
-                      errs.append(f"name 含保留词 {w!r}")
-
-          desc = fields.get("description", "")
-          if not desc:
-              errs.append("缺 description")
-          elif len(desc) > 1024:
-              errs.append(f"description 超 1024 字符（{len(desc)}）")
-
-          n = body.count("\n") + 1
-          if n > 500:
-              errs.append(f"正文 {n} 行，超 500 行——应拆到 references/")
-
-          for ref in re.findall(r"`(references/[^`]+)`", body):
-              if ref.count("/") > 1:
-                  errs.append(f"深链引用：{ref}")
-
-          if errs:
-              print("\n".join("  ✗ " + e for e in errs))
-              sys.exit(1)
-          print(f"  OK  name={name} · 正文 {n} 行 · description {len(desc)} 字符")
-          PY
+        run: python scripts/selfcheck.py --strict
