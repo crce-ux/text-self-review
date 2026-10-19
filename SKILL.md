@@ -46,6 +46,27 @@ compatibility: 主流程为纯文本操作，无依赖。scripts/number_diff.py 
 
 ---
 
+## 开工前确认（先做这一步）
+
+自查前先问清：文本类型、查过几轮、本轮换哪个维度、交给谁。用网页表单问完再查。
+
+```bash
+python scripts/confirm.py --spec references/confirm-spec.json \
+    --out <项目目录>/confirm_answers.json --intake <项目目录>/原料/
+```
+
+### 每项答案的下游动作
+
+**表内每一行都得真的改变后续动作。改变不了的，从表单里删掉。**
+
+| 答案 | 下游动作 |
+|---|---|
+| `text_type` | 讲稿按「念出来」查，文档按「读下去」查，不共用判据 |
+| `rounds` | 查过三轮以上必须换维度；与上一轮维度重复时，本轮无效 |
+| `dimension` | 决定本轮捞什么；未选维度本轮不评 |
+| `audience` | 对外提交按零容忍；组内讨论可保留待补项 |
+| `deliverable` | 只出清单时不动原文 |
+
 ## 流程骨架
 
 ```

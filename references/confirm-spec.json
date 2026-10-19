@@ -1,0 +1,70 @@
+{
+  "title": "文本迭代自查 · 前置确认",
+  "intro": "以下事项决定本轮用哪个维度、查到什么程度算收敛。填写完成后提交，自查据此展开。",
+  "questions": [
+    {
+      "id": "text_type",
+      "type": "radio",
+      "label": "文本类型",
+      "effect": "决定适用哪组维度。讲稿要按「念出来」查，文档按「读下去」查，两者不共用判据。",
+      "required": true,
+      "options": [
+        {"value": "论文或综述"},
+        {"value": "汇报讲稿"},
+        {"value": "审稿意见"},
+        {"value": "调研报告"},
+        {"value": "对外邮件"}
+      ]
+    },
+    {
+      "id": "rounds",
+      "type": "radio",
+      "label": "已自查轮次",
+      "effect": "决定本轮该换哪个维度。维度与上一轮重复的，等于没查。",
+      "required": true,
+      "options": [
+        {"value": "还没查过"},
+        {"value": "查过一两轮"},
+        {"value": "查过三轮以上", "hint": "需要换维度，不是再读一遍"}
+      ]
+    },
+    {
+      "id": "dimension",
+      "type": "radio",
+      "label": "本轮维度",
+      "effect": "决定这一轮查什么。所选维度决定能捞到什么，其余维度本轮不评。",
+      "required": true,
+      "options": [
+        {"value": "对源文件的事实忠实度"},
+        {"value": "外围事实源核对"},
+        {"value": "结构与逻辑推进"},
+        {"value": "语言与文体"},
+        {"value": "体裁专属维度", "hint": "讲稿的朗读性、邮件的目的性"}
+      ]
+    },
+    {
+      "id": "audience",
+      "type": "radio",
+      "label": "交付对象",
+      "effect": "决定判断标准的宽严。对外文本按零容忍；内部讨论可保留待补项。",
+      "required": true,
+      "options": [
+        {"value": "对外提交"},
+        {"value": "组内讨论"},
+        {"value": "自己留存"}
+      ]
+    },
+    {
+      "id": "deliverable",
+      "type": "radio",
+      "label": "本次交付范围",
+      "effect": "决定是否进入改写。只出清单时不动原文。",
+      "required": true,
+      "options": [
+        {"value": "问题清单"},
+        {"value": "问题清单 + 改后稿"},
+        {"value": "以上 + 收敛判断"}
+      ]
+    }
+  ]
+}
